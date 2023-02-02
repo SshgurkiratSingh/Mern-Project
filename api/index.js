@@ -3,17 +3,19 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-// mongoose
-// import UserModel from "./models/User";
+const User = require("./models/User.js");
 const app = express();
 app.use(cors());
 dotenv.config();
-console.log(process.env.MONGO);
+mongoose.connect(process.env.MONGO, (err, c) => {
+  console.log("connected to database");
+});
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   console.log(username);
+  const UserDoc = await User.create({ username, password });
   res.json({ reqData: { username, password } });
 });
-app.listen(400);
+app.listen(4000);
