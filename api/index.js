@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
-  console.log(username);
+  console.log(username, password);
   const UserDoc = await User.create({ username, password });
-  res.json({ reqData: { username, password } });
+  res.json({ reqData: { UserDoc } });
 });
 app.listen(4000);

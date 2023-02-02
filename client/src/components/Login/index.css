@@ -6,7 +6,7 @@
   /* border: 1px solid red; */
 }
 :root {
-  --green: #fb32a4;
+  --green: #DCA54C;
 }
 
 .container {
@@ -190,12 +190,12 @@
   outline: 1px solid var(--green);
   color: white;
   animation: none;
-  box-shadow: 0 0 20px 10px #fb32a4d1;
+  box-shadow: 0 0 20px 10px #DCA54C;
 }
 @keyframes neon {
   0% {
     background-color: var(--green);
-    box-shadow: 0 0 20px 10px #fb32a4d1;
+    box-shadow: 0 0 20px 10px #DCA54C;
   }
   5% {
     background-color: transparent;
