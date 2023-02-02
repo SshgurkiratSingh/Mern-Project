@@ -3,10 +3,11 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-
+// mongoose
+// import UserModel from "./models/User";
 const app = express();
 app.use(cors());
-app.set(dotenv());
+dotenv.config();
 console.log(process.env.MONGO);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -15,4 +16,4 @@ app.post("/register", (req, res) => {
   console.log(username);
   res.json({ reqData: { username, password } });
 });
-app.listen(4000);
+app.listen(400);
