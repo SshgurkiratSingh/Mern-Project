@@ -15,7 +15,11 @@ app.use(express.json());
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
-  const UserDoc = await User.create({ username, password });
-  res.json({ reqData: { UserDoc } });
+  try {
+    const UserDetail = await User.create({ username, password });
+    res.json({ reqData: { UserDetail } });
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 app.listen(4000);
