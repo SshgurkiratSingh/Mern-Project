@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import "../Login/index.css";
 import { useState } from "react";
@@ -9,12 +9,16 @@ const RegistrationPage = () => {
   async function register(ev) {
     ev.preventDefault();
     const dataToSend = JSON.stringify({ username, password });
-
-    await fetch("http://localhost:4000/register", {
+    const response = await fetch("http://localhost:4000/register", {
       method: "POST",
       body: dataToSend,
       headers: { "Content-Type": "application/json" },
     });
+    if (response.status !== 200) {
+      alert("Registration Failed");
+    } else {
+      alert("Registered Successful");
+    }
   }
   return (
     <>

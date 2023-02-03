@@ -4,10 +4,12 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("./models/User.js");
 const salt = bcryptjs.genSaltSync(10);
 const app = express();
-app.use(cors());
+const secret = "fadv555v6a2dvdfv9d2vd9fv89d7f";
+app.use(cors({ credentials: true, origin: "http://localhost:3000/" }));
 dotenv.config();
 mongoose.connect(process.env.MONGO, (err, c) => {
   console.log("connected to database");
@@ -39,6 +41,12 @@ app.post("/login", async (req, res) => {
   } else {
     const passOk = bcryptjs.compareSync(password, UserDetal.password);
     if (passOk) {
+      //token gen
+      jwt.sign({ username, id: UserDetal._id }, secret, {}, (err, token) => {
+        if (err) throw err;
+        // console.log(token);
+        res.cookie("token", token).json("done");
+      });
     } else {
       res.status(400).json({ err: "Wrong Credentials" });
     }
