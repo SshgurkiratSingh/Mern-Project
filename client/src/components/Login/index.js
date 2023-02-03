@@ -15,7 +15,7 @@ const LoginPage = () => {
       credentials: "include",
       body: JSON.stringify({ username, password }),
     });
-    console.log(res);
+
     if (res.ok) {
       res.json().then((userInfo) => {
         setUserINFO(userInfo);

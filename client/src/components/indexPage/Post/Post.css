@@ -1,14 +1,18 @@
 .card{
     align-items: center;
+    
   }
   div.post{
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
     gap:20px;
+    overflow:hidden;
   margin-bottom: 10px;
   }
-  img{
+  div.post img{
     max-width: 100%;
+    margin-top:15px
+    
   }
   
   div.post div.texts h2{
@@ -16,17 +20,17 @@
   font-size: 1.8rem;
   }
   div.post p.infos{
-    margin:6px 0;
+    margin:4px 0;
     color:blanchedalmond;
     font-size: .5rem;
     font-weight: bold;
-    gap:10px;
+    gap:5px;
     display: flex;
   }
   div.post p.infos a.author{
     color:gold;
   }
   div.post p.summary{
-    margin:10px 0px;
+    margin:4px 0px;
     line-height: 1.5rem;
   }

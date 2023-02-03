@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     );
   },
 });
-
+app.use("/image", express.static(__dirname + "/public/upload"));
 function checkFileType(file, cb) {
   const filetypes = /jpeg|jpg|png|gif|webp/;
   // Check ext
@@ -114,17 +114,39 @@ app.get("/validate", (req, res) => {
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
-app.post("/post", (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      res.json({ err });
-    } else {
-      const { title, summary, content } = req.body;
-      const filename = req.file.filename;
-      res.json({ filename, summary, title, content });
-
-      Post.create({ title, summary, cover: filename, content });
-    }
+app.post("/post", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, (err, info) => {
+    console.log(info);
+    upload(req, res, async (err) => {
+      if (err) {
+        res.json({ err });
+      } else {
+        const { title, summary, content } = req.body;
+        const filename = req.file.filename;
+        const postDo = await Post.create({
+          title,
+          summary,
+          cover: filename,
+          content,
+          publisher: info.id,
+        });
+        res.json(postDo);
+      }
+    });
   });
 });
+
+app.get("/postlist", async (req, res) => {
+  const post = await Post.find()
+    .populate("publisher", ["username"])
+    .sort({ createdAt: -1 });
+  res.json(post);
+});
+app.get("/post/:id", async (req, res) => {
+  const { id } = req.params;
+  const respo = await Post.findById(id).populate("publisher", ["username"]);
+  res.json(respo);
+});
 app.listen(4000);
+//

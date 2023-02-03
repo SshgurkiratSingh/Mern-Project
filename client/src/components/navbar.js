@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 export default function Navbar() {
   const { setUserINFO, userINFO } = useContext(UserContext);
+  console.log(userINFO);
   useEffect(() => {
     fetch("http://localhost:4000/validate", {
       credentials: "include",
@@ -20,6 +21,7 @@ export default function Navbar() {
     setUserINFO(null);
   }
   const username = userINFO?.username;
+
   return (
     <header className="flex">
       <nav className="navbar bg-base-100 ">

@@ -7,5 +7,5 @@ const UserListSchema = new Schema({
   articlePublished: { type: Number, default: 0 },
   fullName: { type: String, default: "Not Added" },
 });
-const UserModel = model("UserList", UserListSchema);
+const UserModel = model("User", UserListSchema);
 module.exports = UserModel;
