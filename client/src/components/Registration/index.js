@@ -14,6 +14,9 @@ const RegistrationPage = () => {
       body: dataToSend,
       headers: { "Content-Type": "application/json" },
     });
+    if (response.ok === false) {
+      alert("Registration Failed");
+    }
     if (response.status !== 200) {
       alert("Registration Failed");
     } else {
