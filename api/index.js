@@ -148,5 +148,8 @@ app.get("/post/:id", async (req, res) => {
   const respo = await Post.findById(id).populate("publisher", ["username"]);
   res.json(respo);
 });
+app.put("/postup", async (req, res) => {
+  console.log(req.body);
+});
 app.listen(4000);
 //

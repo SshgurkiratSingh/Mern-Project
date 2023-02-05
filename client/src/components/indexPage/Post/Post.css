@@ -4,10 +4,13 @@
   }
   div.post{
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 1fr;
     gap:20px;
     overflow:hidden;
   margin-bottom: 10px;
+  }
+  @media screen and (min-width:600px){
+    div.post {  grid-template-columns: 0.9fr 1.1fr;}
   }
   div.post img{
     max-width: 100%;
